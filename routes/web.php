@@ -14,3 +14,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/user', 'userController@index');
+$router->get('/user/limit/{limit}', 'userController@limit');
+$router->get('/user/{id}', 'userController@show');
+$router->post('/user', 'userController@index');

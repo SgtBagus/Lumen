@@ -1,0 +1,62 @@
+{
+	"select" : ["id", "firstname", "lastname", "gender", "status", "email", "city", "address", "phone", "created_at"],
+	"limit" : 10,
+	"conditions" : [
+        {
+        	"type" : "whereColumn", 
+        	"data" : 
+        	{
+                "1": ["firstname", "=", "lastname"],
+                "2": ["lastname", "=", "firstname"]
+        	}
+        },
+        {
+        	"type" : "whereNull", 
+        	"data" : ["created_at"]
+        },
+        {
+        	"type" : "whereNotIn",
+        	"data" : ["status", ["Banned","Loss"]]
+        },
+        {
+        	"type" : "whereNotIn",
+        	"data" : ["status", ["Active","Pending"]]
+        },
+        {
+        	"type" : "whereNotBetween",
+        	"data" : ["id", [10,20]]
+        },
+        {
+        	"type" : "whereBetween",
+        	"data" : ["id", [30,50]]
+        },
+        {
+        	"type" : "orWhere",
+        	"data" : ["id", "<>", 1]
+        },
+        {
+        	"type" : "orWhere",
+        	"function" : [
+        		{
+        			"type" : "whereNotIn",
+        			"data" : ["status", ["Banned", "Disabled"]]
+        		},
+        		{
+        			"type" : "whereIn",
+        			"data" : ["status", ["Active", "Banned"]]
+        		}
+        	]
+        }
+	],
+	"current_page" : 1,
+	"order" : [
+		{
+			"field" : "name",
+			"order" : "DESC"
+		},
+		{
+			"field" : "date",
+			"order" : "DESC"
+		}
+	]
+}
